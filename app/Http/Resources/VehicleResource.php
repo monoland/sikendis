@@ -24,7 +24,12 @@ class VehicleResource extends JsonResource
             'refs_numb' => $this->refs_numb,
             'brand_id' => $this->brand_id,
             'type_id' => $this->type_id,
-            'police_id' => $this->police_id,
+            $this->mergeWhen($this->police, [
+                'police_id' => $this->police->id,
+                'color' => $this->police->color,
+                'taxdue' => $this->police->taxdue,
+                'taxsum' => $this->police->taxsum,
+            ]),
             'agency_id' => $this->agency_id,
             'condition' => $this->condition,
             'pinned' => false,

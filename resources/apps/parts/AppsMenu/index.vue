@@ -15,7 +15,7 @@
                 <v-flex class="v-user px-4 py-2 white--text" :class="{ 'expand': expand }" shrink @click="expand = !expand">
                     <div class="v-user__content">
                         <div class="font-weight-medium line-height1">{{ auth.user.name }}</div>
-                        <div class="body-2">{{ auth.user.email }}</div>
+                        <div class="body-2 text-truncate" style="max-width: 200px;">{{ auth.user.email }}</div>
                     </div>
                     <div class="v-user__action">
                         <v-icon dark>arrow_drop_down</v-icon>

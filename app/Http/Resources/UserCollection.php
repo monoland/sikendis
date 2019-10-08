@@ -33,7 +33,7 @@ class UserCollection extends ResourceCollection
                 'additional' => [
                     'combos' => [
                         'authents' => Authent::fetchCombo($request)->whereNotIn('name', [
-                            'administrator',
+                            'administrator', 'bengkel',
                         ])->get(),
                     ],
 
@@ -47,7 +47,7 @@ class UserCollection extends ResourceCollection
                 'additional' => [
                     'combos' => [
                         'authents' => Authent::fetchCombo($request)->whereIn('name', [
-                            'garage',
+                            'bengkel',
                         ])->get(),
                     ],
 

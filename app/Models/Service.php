@@ -5,6 +5,7 @@ namespace App\Models;
 // use App\Traits\HasMetaField;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ServiceResource;
+use App\Notifications\ServiceCreated;
 use Illuminate\Database\Eloquent\Model;
 
 // use Illuminate\Database\Eloquent\SoftDeletes;
@@ -133,6 +134,8 @@ class Service extends Model
         DB::beginTransaction();
 
         try {
+            $status = $request->user()->operatorUmum() ? 'submission' : 'disposition';
+
             $model = new static();
             $model->vehicle_id = $request->vehicle['value'];
             $model->agency_id = $request->vehicle['agency_id'];
@@ -141,7 +144,19 @@ class Service extends Model
             $model->periode = $request->periode;
             $model->user_id = $request->user()->id;
             $model->notes = $request->notes;
+            $model->status = $status;
             $model->save();
+
+            if ($status === 'disposition') {
+                $agency = $request->user()->userable;
+                $user = $agency->users()->where('authent_id', 3)->first();
+            } else {
+                $user = User::where('authent_id', 4)->first();
+            }
+
+            if ($user) {
+                $user->notify(new ServiceCreated($model));
+            }
 
             DB::commit();
 

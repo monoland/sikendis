@@ -75,6 +75,76 @@ class User extends Authenticatable
     }
 
     /**
+     * Undocumented function.
+     *
+     * @return bool
+     */
+    public function isOperator()
+    {
+        return $this->authent->name === 'operator';
+    }
+
+    /**
+     * Undocumented function.
+     *
+     * @return bool
+     */
+    public function isKabiro()
+    {
+        return $this->authent->name === 'kabiro';
+    }
+
+    /**
+     * Undocumented function.
+     *
+     * @return bool
+     */
+    public function isPPTK()
+    {
+        return $this->authent->name === 'pptk';
+    }
+
+    /**
+     * Undocumented function.
+     *
+     * @return bool
+     */
+    public function isKPA()
+    {
+        return $this->authent->name === 'kpa';
+    }
+
+    /**
+     * Undocumented function.
+     *
+     * @return bool
+     */
+    public function isBengkel()
+    {
+        return $this->authent->name === 'bengkel';
+    }
+
+    /**
+     * Undocumented function.
+     *
+     * @return bool
+     */
+    public function isTataUsaha()
+    {
+        return $this->authent->name === 'tata-usaha';
+    }
+
+    /**
+     * Undocumented function.
+     *
+     * @return bool
+     */
+    public function operatorUmum()
+    {
+        return $this->authent->name === 'operator' && $this->userable->slug === 'biro-umum';
+    }
+
+    /**
      * Scope for filter.
      */
     public function scopeFilterOn($query, $request)
@@ -110,8 +180,8 @@ class User extends Authenticatable
             $model->authent_id = $request->authent_id;
             $model->password = Hash::make('12345678');
             $model->theme = 'blue-grey';
-            $model->avatar = '/images/photo-holder.png';
-            $model->background = '/images/drawer-holder.svg';
+            $model->avatar = '/images/user-holder.png';
+            $model->background = '/images/draw-holder.svg';
 
             if (!$parent) {
                 $model->save();

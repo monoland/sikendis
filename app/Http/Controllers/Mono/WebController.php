@@ -117,12 +117,25 @@ class WebController extends Controller
                 return response()->json([
                     'deskbar' => [
                         ['type' => 'item', 'icon' => 'dashboard', 'text' => 'Beranda', 'to' => ['name' => 'home']],
+                        // transaction
+                        ['type' => 'subheader', 'text' => 'Transaction', 'class' => 'mt-2'],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Service', 'to' => ['name' => 'service']],
                     ],
-                    'mobibar' => [],
-                    'homebar' => [],
+                    'mobibar' => [
+                        // transaction
+                        ['type' => 'subheader', 'text' => 'Transaction', 'class' => 'mt-2'],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Service', 'to' => ['name' => 'service']],
+                    ],
+                    'homebar' => [
+                        ['type' => 'item', 'icon' => 'dashboard', 'text' => 'Beranda', 'to' => ['name' => 'home']],
+                        ['type' => 'item', 'icon' => 'perm_identity', 'text' => 'Profile', 'to' => ['name' => 'profile']],
+                        ['type' => 'item', 'icon' => 'lock', 'text' => 'Katasandi', 'to' => ['name' => 'password']],
+                        ['type' => 'item', 'icon' => 'settings', 'text' => 'Setting', 'to' => ['name' => 'setting']],
+                    ],
                     'account' => [
                         ['type' => 'item', 'icon' => 'perm_identity', 'text' => 'Profile', 'to' => ['name' => 'profile']],
                         ['type' => 'item', 'icon' => 'lock', 'text' => 'Katasandi', 'to' => ['name' => 'password']],
+                        ['type' => 'item', 'icon' => 'settings', 'text' => 'Setting', 'to' => ['name' => 'setting']],
                     ],
                 ]);
                 break;

@@ -18,6 +18,7 @@ class CreatePoliceTable extends Migration
             $table->date('taxdue')->nullable();
             $table->double('taxsum', 8, 2)->default(0);
             $table->text('describe')->nullable();
+            $table->unsignedBigInteger('vehicle_id')->index();
             $table->timestamps();
         });
     }

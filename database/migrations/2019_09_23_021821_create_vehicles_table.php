@@ -23,6 +23,7 @@ class CreateVehiclesTable extends Migration
             $table->string('police_id')->index();
             $table->unsignedBigInteger('agency_id')->nullable()->index();
             $table->enum('condition', ['B', 'KB', 'RB'])->default('B');
+            $table->double('recaps', 8, 2)->default(0);
             $table->timestamps();
 
             $table->unique(['frame_numb', 'machine_numb']);

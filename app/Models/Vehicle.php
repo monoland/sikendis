@@ -55,7 +55,21 @@ class Vehicle extends Model
      */
     protected $fillable = [];
 
-    // relations
+    /**
+     * Undocumented function.
+     */
+    public function police()
+    {
+        return $this->belongsTo(Police::class);
+    }
+
+    /**
+     * Undocumented function.
+     */
+    public function polices()
+    {
+        return $this->hasMany(Police::class);
+    }
 
     /**
      * Scope for combo.
@@ -105,14 +119,6 @@ class Vehicle extends Model
         DB::beginTransaction();
 
         try {
-            $police = Police::findOrNew($request->police_id);
-            $police->id = $request->police_id;
-            $police->name = $request->name;
-            $police->color = $request->color;
-            $police->taxdue = $request->taxdue;
-            $police->taxsum = $request->taxsum;
-            $police->save();
-
             $model = new static();
             $model->police_id = $request->police_id;
             $model->name = $request->name;
@@ -123,8 +129,15 @@ class Vehicle extends Model
             $model->refs_numb = $request->refs_numb;
             $model->agency_id = $request->agency_id;
             $model->condition = $request->condition;
-
             $parent->vehicles()->save($model);
+
+            $police = new Police();
+            $police->id = $request->police_id;
+            $police->name = $request->name;
+            $police->color = $request->color;
+            $police->taxdue = $request->taxdue;
+            $police->taxsum = $request->taxsum;
+            $model->polices()->save($police);
 
             DB::commit();
 
@@ -144,8 +157,22 @@ class Vehicle extends Model
         DB::beginTransaction();
 
         try {
-            // ...
+            $model->name = $request->name;
+            $model->year = $request->year;
+            $model->frame_numb = $request->frame_numb;
+            $model->machine_numb = $request->machine_numb;
+            $model->refs_numb = $request->refs_numb;
+            $model->agency_id = $request->agency_id;
+            $model->condition = $request->condition;
             $model->save();
+
+            $police = Police::findOrNew($request->police_id);
+            $police->id = $request->police_id;
+            $police->name = $request->name;
+            $police->color = $request->color;
+            $police->taxdue = $request->taxdue;
+            $police->taxsum = $request->taxsum;
+            $model->polices()->save($police);
 
             DB::commit();
 

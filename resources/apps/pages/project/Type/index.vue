@@ -8,9 +8,32 @@
             <v-btn-tips @click="openLink" label="item" icon="photo_filter" :show="!disabled.link" />
         </template>
 
-        <v-desktop-table v-if="desktop"
-            single
-        ></v-desktop-table>
+        <v-widget table v-if="desktop">
+            <v-data-table
+                v-model="table.selected"
+                :headers="headers"
+                :items="records"
+                :single-select="true"
+                :loading="table.loader"
+                :options.sync="table.options"
+                :server-items-length="table.total"
+                :footer-props="table.footerProps"
+                item-key="id"
+                show-select
+            >
+                <template #:progress>
+                    <v-progress-linear :color="color" height="1" indeterminate></v-progress-linear>
+                </template>
+
+                <template v-slot:item.maxi="{ value }">
+                    {{ $root.formatCurrency(value) }}
+                </template>
+
+                <template v-slot:item.warn="{ value }">
+                    {{ $root.formatCurrency(value) }}
+                </template>
+            </v-data-table>
+        </v-widget>
 
         <v-mobile-table icon="perm_identity" v-else>
             <template v-slot:default="{ item }">

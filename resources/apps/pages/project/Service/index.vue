@@ -125,7 +125,19 @@
                         :items="record.details"
                         :headers="detailHeaders"
                         hide-default-footer
-                    ></v-data-table>
+                    >
+                        <template v-slot:item.qty="{ value }">
+                            {{ $root.formatCurrency(value) }}
+                        </template>
+
+                        <template v-slot:item.price="{ value }">
+                            {{ $root.formatCurrency(value) }}
+                        </template>
+
+                        <template v-slot:item.amount="{ value }">
+                            {{ $root.formatCurrency(value) }}
+                        </template>
+                    </v-data-table>
                 </v-col>
             </v-row>
 
@@ -262,9 +274,9 @@ export default {
         detailHeaders: [
             { text: 'Item', sortable: false, value: 'text' },
             { text: 'Unit', sortable: false, value: 'unit' },
-            { text: 'Qty', sortable: false, value: 'qty' },
-            { text: 'Harga', sortable: false, value: 'price' },
-            { text: 'Total', sortable: false, value: 'amount' },
+            { text: 'Qty', sortable: false, align: 'end', value: 'qty' },
+            { text: 'Harga', sortable: false, align: 'end', value: 'price' },
+            { text: 'Total', sortable: false, align: 'end', value: 'amount' },
         ]
     }),
 

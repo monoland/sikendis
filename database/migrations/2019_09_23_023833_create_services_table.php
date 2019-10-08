@@ -20,15 +20,10 @@ class CreateServicesTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->boolean('approval')->default(false);
             $table->string('periode')->index();
-            $table->string('reff_spk')->nullable()->index();
-            $table->boolean('invoiced')->default(false);
-            $table->string('reff_invoice')->nullable()->index();
-            $table->date('date_invoice')->nullable()->index();
-            $table->double('subtotal', 8, 2)->default(0);
-            $table->double('tax', 8, 2)->default(0);
+            $table->string('refs_spk')->nullable()->index();
             $table->double('total', 8, 2)->default(0);
             $table->text('notes')->nullable();
-            $table->enum('status', ['drafted', 'approved', 'delivered', 'invoiced'])->default('drafted')->index();
+            $table->enum('status', ['disposition', 'submission', 'examine', 'approval', 'work-order', 'invoiced'])->default('drafted')->index();
             $table->timestamps();
 
             $table->unique(['police_id', 'periode']);

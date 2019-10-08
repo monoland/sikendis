@@ -18,29 +18,31 @@
         </v-mobile-table>
 
         <v-page-form small>
-            <v-flex xs8>
-                <v-text-field
-                    label="Nama Pengguna"
-                    :color="$root.theme"
-                    v-model="record.name"
-                ></v-text-field>
-            </v-flex>
+            <v-row>
+                <v-col cols="8">
+                    <v-text-field
+                        label="Nama Pengguna"
+                        :color="$root.theme"
+                        v-model="record.name"
+                    ></v-text-field>
+                </v-col>
 
-            <v-flex xs4>
-                <v-select
-                    label="Hak Akses"
-                    :items="authents"
-                    v-model="record.authent_id"
-                ></v-select>
-            </v-flex>
+                <v-col cols="4">
+                    <v-select
+                        label="Hak Akses"
+                        :items="authents"
+                        v-model="record.authent_id"
+                    ></v-select>
+                </v-col>
 
-            <v-flex xs12>
-                <v-text-field
-                    label="Alamat email"
-                    :color="$root.theme"
-                    v-model="record.email"
-                ></v-text-field>
-            </v-flex>
+                <v-col cols="12">
+                    <v-text-field
+                        label="Alamat email"
+                        :color="$root.theme"
+                        v-model="record.email"
+                    ></v-text-field>
+                </v-col>
+            </v-row>
         </v-page-form>
     </v-page-wrap>
 </template>

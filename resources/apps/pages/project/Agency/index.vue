@@ -1,7 +1,7 @@
 <template>
     <v-page-wrap crud absolute searchable with-progress>
         <template #toolbar-default>
-            <v-btn-tips @click="openLink" label="agency-user" icon="photo_filter" :show="!disabled.link" />
+            <v-btn-tips @click="openLink" label="PENGGUNA" icon="photo_filter" :show="!disabled.link" />
         </template>
 
         <v-desktop-table v-if="desktop"
