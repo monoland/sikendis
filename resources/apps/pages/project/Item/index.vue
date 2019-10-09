@@ -71,7 +71,7 @@ export default {
 
         this.pageInfo({
             icon: 'people',
-            title: 'Item',
+            title: 'Item Service',
         });
 
         this.dataUrl(`/api/segment/${this.$route.params.segment}/item`);

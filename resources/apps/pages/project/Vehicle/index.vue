@@ -150,7 +150,7 @@ export default {
 
         this.pageInfo({
             icon: 'people',
-            title: 'Kendaraan',
+            title: 'Daftar Kendaraan',
         });
 
         if (this.$route.query.type) {

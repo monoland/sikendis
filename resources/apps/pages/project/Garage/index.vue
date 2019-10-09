@@ -73,7 +73,7 @@ export default {
 
         this.pageInfo({
             icon: 'people',
-            title: 'Bengkel',
+            title: 'Daftar Bengkel',
         });
 
         this.dataUrl(`/api/garage`);

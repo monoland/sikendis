@@ -5,7 +5,7 @@
         </template>
 
         <template #toolbar-default>
-            <v-btn-tips @click="openLink" label="item" icon="photo_filter" :show="!disabled.link" />
+            <v-btn-tips @click="openLink" label="DAFTAR-KENDARAAN" icon="photo_filter" :show="!disabled.link" />
         </template>
 
         <v-widget table v-if="desktop">

@@ -63,7 +63,7 @@ export default {
 
         this.pageInfo({
             icon: 'people',
-            title: 'Organisasi Perangkat Daerah',
+            title: 'Daftar OPD',
         });
 
         this.dataUrl(`/api/agency`);

@@ -78,14 +78,14 @@ class WebController extends Controller
                         ['type' => 'item', 'icon' => 'dashboard', 'text' => 'Beranda', 'to' => ['name' => 'home']],
                         // master
                         ['type' => 'subheader', 'text' => 'Master', 'class' => 'mt-2'],
-                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Biro', 'to' => ['name' => 'agency']],
-                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Bengkel', 'to' => ['name' => 'garage']],
-                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Segmen', 'to' => ['name' => 'segment']],
-                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Merek', 'to' => ['name' => 'brand']],
-                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Kendaraan', 'to' => ['name' => 'vehicle']],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Daftar OPD', 'to' => ['name' => 'agency']],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Daftar Bengkel', 'to' => ['name' => 'garage']],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Jenis Service', 'to' => ['name' => 'segment']],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Merek Kendaraan', 'to' => ['name' => 'brand']],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Daftar Kendaraan', 'to' => ['name' => 'vehicle']],
                         // transaction
                         ['type' => 'subheader', 'text' => 'Transaction', 'class' => 'mt-2'],
-                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Service', 'to' => ['name' => 'service']],
+                        ['type' => 'item', 'icon' => 'filter_none', 'text' => 'Pengajuan Service', 'to' => ['name' => 'service']],
                         // utilitas
                         ['type' => 'subheader', 'text' => 'Utilitas', 'class' => 'mt-2'],
                         ['type' => 'item', 'icon' => 'whatshot', 'text' => 'OAuth Klien', 'to' => ['name' => 'client']],

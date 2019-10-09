@@ -290,7 +290,7 @@ export default {
 
         this.pageInfo({
             icon: 'people',
-            title: 'Service',
+            title: 'Pengajuan Service',
         });
 
         this.dataUrl(`/api/service`);
