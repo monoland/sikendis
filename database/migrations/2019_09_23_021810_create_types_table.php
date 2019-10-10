@@ -14,12 +14,14 @@ class CreateTypesTable extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->index();
-            $table->string('slug')->unique();
+            $table->string('slug')->index();
             $table->unsignedSmallInteger('year')->default(0);
             $table->double('maxi', 8, 2)->default(0);
             $table->double('warn', 8, 2)->default(0);
             $table->unsignedBigInteger('brand_id')->index();
             $table->timestamps();
+
+            $table->unique(['slug', 'year']);
         });
     }
 
