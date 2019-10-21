@@ -126,6 +126,12 @@ class Service extends Model
         $mixquery = $query;
 
         switch ($request->user()->authent->name) {
+            case 'operator':
+                $mixquery
+                    ->where('agency_id', $request->user()->userable->id)
+                    ->whereIn('status', ['disposition', 'submission', 'examine', 'approval']);
+                break;
+
             case 'kabiro':
                 $mixquery
                     ->where('agency_id', $request->user()->userable->id)
@@ -145,12 +151,6 @@ class Service extends Model
             case 'tata-usaha':
                 $mixquery
                     ->whereIn('status', ['work-order']);
-                break;
-            
-            default:
-                $mixquery
-                    ->where('agency_id', $request->user()->userable->id)
-                    ->whereIn('status', ['disposition', 'submission', 'examine', 'approval']);
                 break;
         }
 
