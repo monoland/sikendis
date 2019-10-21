@@ -46,6 +46,8 @@ export default {
     }),
 
     created() {
+        this.auth.pageinfo = null;
+        
         this.tableHeaders([
             { text: 'Name', value: 'name' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
@@ -66,6 +68,7 @@ export default {
 
     methods: {
         openLink: function() {
+            this.auth.pageinfo = this.record.name;
             this.$router.push({ name: 'item', params: { segment: this.record.id } });
         },
     }

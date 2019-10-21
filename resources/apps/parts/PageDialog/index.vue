@@ -31,7 +31,7 @@
 
             <v-layout row pb-2>
                 <v-flex :xs8="!small" :offset-xs2="!small" :xs6="small" :offset-xs3="small">
-                    <v-widget form style="margin-top: -56px !important;">
+                    <v-widget form :title="title" :subtitle="subtitle" style="margin-top: -56px !important;">
                         <v-container class="px-0 pb-0 pt-2" grid-list-md>
                             <slot></slot>
                         </v-container>
@@ -65,7 +65,12 @@ export default {
 
         title: {
             type: String,
-            default: ''
+            default: null
+        },
+
+        subtitle: {
+            type: String,
+            default: null
         },
 
         small: {

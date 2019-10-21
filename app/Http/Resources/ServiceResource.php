@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Crypt;
 
 class ServiceResource extends JsonResource
 {
@@ -20,11 +21,23 @@ class ServiceResource extends JsonResource
         return [
             'id' => $this->id,
             'police_id' => $this->police_id,
+            'vehicle' => [
+                'text' => $this->police_id . ' - ' . $this->agency->name . ' an: ' . $this->vehicle->name,
+                'agency_id' => $this->agency_id,
+                'value' => $this->vehicle_id,
+                'name' => optional($this->vehicle)->name,
+                'brand' => optional($this->vehicle)->brand->name,
+                'type' => optional($this->vehicle)->type->name,
+                'year' => optional($this->vehicle)->year
+            ],
             'garage' => [
-                'text' => $this->garage->name,
-                'value' => $this->garage->id,
+                'text' => optional($this->garage)->name,
+                'value' => optional($this->garage)->id,
+                'address' => optional($this->garage)->address,
+                'phone' => optional($this->garage)->phone
             ],
             'periode' => $this->periode,
+            'status' => $this->status,
             'notes' => $this->notes,
             'subtotal' => (float) $this->subtotal,
             'disc' => (float) $this->disc,

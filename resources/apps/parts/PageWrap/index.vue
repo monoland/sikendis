@@ -7,6 +7,8 @@
                 :flat="flat"
                 :searchable="searchable"
                 :withProgress="withProgress"
+                :enable-delete="enableDelete"
+                :enable-edit="enableEdit"
             >
                 <template #navigate>
                     <slot name="navigate"></slot>
@@ -45,6 +47,16 @@ export default {
         crud: {
             type: Boolean,
             default: false
+        },
+
+        enableDelete: {
+            type: Boolean,
+            default: true
+        },
+
+        enableEdit: {
+            type: Boolean,
+            default: true
         },
 
         flat: {

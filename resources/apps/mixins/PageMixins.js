@@ -3,7 +3,7 @@ import { mapState, mapActions } from 'vuex';
 export const pageMixins = {
     computed: {
         ...mapState([
-            'combos', 'disabled', 'form', 'headers', 'http', 'info',
+            'auth', 'combos', 'disabled', 'form', 'headers', 'http', 'info',
             'page', 'record', 'records', 'table', 'toolbar'
         ]),
 
@@ -27,8 +27,8 @@ export const pageMixins = {
 
     methods: {
         ...mapActions([
-            'afterSelected', 'dataUrl', 'recordFetch', 'initStore', 
-            'overideState', 'pageInfo', 'recordNew', 'setRecord', 
+            'afterSelected', 'dataUrl', 'recordFetch', 'initStore', 'editFormOpen', 
+            'overideState', 'pageInfo', 'recordNew', 'recordReload', 'setRecord', 
             'setAfterSelected', 'setCancelNewForm', 'setOverideState', 'tableHeaders',
             'newFormOpen', 'setUploadCallback', 'setFilter', 'setAfterFormClose'
         ])

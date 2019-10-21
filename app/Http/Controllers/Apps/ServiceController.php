@@ -104,4 +104,60 @@ class ServiceController extends Controller
     {
         return Service::fetchCombo($request);
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param Service $service
+     * @return void
+     */
+    public function submission(Service $service)
+    {
+        $this->authorize('submission', $service);
+        
+        return Service::submission($service);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Service $service
+     * @return void
+     */
+    public function examine(Request $request, Service $service)
+    {
+        $this->authorize('examine', Service::class);
+
+        $this->validate($request, [
+            'garage' => 'required'
+        ]);
+
+        return Service::examine($request, $service);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Service $service
+     * @return void
+     */
+    public function approval(Service $service)
+    {
+        $this->authorize('approval', Service::class);
+
+        return Service::approval($service);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param Service $service
+     * @return void
+     */
+    public function workorder(Service $service)
+    {
+        $this->authorize('workorder', $service);
+        
+        return Service::workorder($service);
+    }
 }

@@ -50,16 +50,16 @@ export default {
     }),
     
     created() {
-        if (this.value) this.date = this.value;
+        this.date = this.value;
     },
 
     watch: {
         date: function (newVal) {
-            if (newVal) this.$emit('input', newVal);
+            this.$emit('input', newVal);
         },
 
         value: function(newVal) {
-            if (newVal) this.date = newVal;
+            this.date = newVal;
         }
     }
 };

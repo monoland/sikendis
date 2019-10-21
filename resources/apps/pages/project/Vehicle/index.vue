@@ -1,5 +1,9 @@
 <template>
     <v-page-wrap crud absolute searchable with-progress>
+        <template #navigate v-if="hasback">
+            <v-btn-tips @click="$router.go(-1)" label="segment" icon="arrow_back" :show="true" />
+        </template>
+
         <v-desktop-table v-if="desktop"
             single
         ></v-desktop-table>
@@ -136,7 +140,9 @@ export default {
             { text: 'Baik', value: 'B' },
             { text: 'Kurang Baik', value: 'KB' },
             { text: 'Rusak Berat', value: 'RB' }
-        ]
+        ],
+
+        hasback: false
     }),
 
     created() {
@@ -154,9 +160,12 @@ export default {
         });
 
         if (this.$route.query.type) {
+            this.hasback = true;
             this.dataUrl(`/api/type/${this.$route.query.type}/vehicle`);
             this.setCancelNewForm(() => { return false; });
         } else {
+            this.auth.pageinfo = null;
+
             this.dataUrl(`/api/vehicle`);
             this.setCancelNewForm(() => { return true; });
         }
@@ -181,6 +190,9 @@ export default {
         '$route.query.type': {
             handler: function(type) {
                 if (!type) {
+                    this.auth.pageinfo = null;
+                    this.hasback = false;
+
                     this.dataUrl(`/api/vehicle`);
                     this.setCancelNewForm(() => { return true; });
                 }

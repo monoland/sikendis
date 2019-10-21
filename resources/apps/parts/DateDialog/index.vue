@@ -44,19 +44,16 @@ export default {
     }),
     
     created() {
-        if (this.value) this.date = this.value;
-        // } else {
-        //     this.date = new Date().toISOString().substr(0, 10);
-        // }
+        this.date = this.value;
     },
 
     watch: {
         date: function (newVal) {
-            if (newVal) this.$emit('input', newVal);
+            this.$emit('input', newVal);
         },
 
         value: function(newVal) {
-            if (newVal) this.date = newVal;
+            this.date = newVal;
         }
     }
 };

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 Vue.config.productionTip = false;
 
@@ -12,6 +13,7 @@ Object.keys(Parts).forEach((part) => {
 import { createSimpleTransition } from 'vuetify/es5/util/helpers';
 const dialogMove = createSimpleTransition('dialog-move-transition');
 Vue.component('dialog-move-transition', dialogMove);
+Vue.component(VueQrcode.name, VueQrcode);
 
 // add press directive
 import Hammer from 'hammerjs';

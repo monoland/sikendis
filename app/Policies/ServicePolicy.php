@@ -45,7 +45,7 @@ class ServicePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isOperator();
+        return true;
     }
 
     /**
@@ -61,6 +61,30 @@ class ServicePolicy
     }
 
     /**
+     * Determine whether the user can create services.
+     *
+     * @param \App\Models\User $user
+     *
+     * @return mixed
+     */
+    public function examine(User $user)
+    {
+        return $user->isPPTK();
+    }
+
+    /**
+     * Determine whether the user can create services.
+     *
+     * @param \App\Models\User $user
+     *
+     * @return mixed
+     */
+    public function approval(User $user)
+    {
+        return $user->isKPA();
+    }
+
+    /**
      * Determine whether the user can update the service.
      *
      * @param \App\Models\User    $user
@@ -70,6 +94,32 @@ class ServicePolicy
      */
     public function update(User $user, Service $service)
     {
+    }
+
+    /**
+     * Determine whether the user can update the service.
+     *
+     * @param \App\Models\User    $user
+     * @param \App\Models\Service $service
+     *
+     * @return mixed
+     */
+    public function submission(User $user, Service $service)
+    {
+        return $user->isKabiro() && $service->agency_id === $user->userable->id;
+    }
+
+    /**
+     * Determine whether the user can update the service.
+     *
+     * @param \App\Models\User    $user
+     * @param \App\Models\Service $service
+     *
+     * @return mixed
+     */
+    public function workorder(User $user, Service $service)
+    {
+        return $user->isOperator() && $service->agency_id === $user->userable->id;
     }
 
     /**

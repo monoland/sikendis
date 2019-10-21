@@ -1,9 +1,17 @@
 <template>
-    <v-page-wrap crud absolute searchable with-progress>
+    <v-page-wrap :enable-delete="enableDelete" :enable-edit="enableEdit" crud absolute searchable with-progress>
         <template #toolbar-default>
-            <v-btn-tips @click="openApproval" label="PERSETUJUAN" icon="verified_user" :show="!disabled.link" />
-            <v-btn-tips @click="printDelivery" label="SURAT JALAN" icon="local_shipping" :show="!disabled.link" />
-            <v-btn-tips @click="openInvoice" label="INVOICE" icon="payment" :show="!disabled.link" />
+            <template v-if="auth.authent === 'kabiro' || auth.authent === 'pptk' || auth.authent === 'kpa'">
+                <v-btn-tips @click="openApproval" label="PERSETUJUAN" icon="verified_user" :show="!disabled.link" />
+            </template>
+            
+            <template v-if="auth.authent === 'operator' && record.status === 'approval'">
+                <v-btn-tips @click="openDelivery" label="SURAT JALAN" icon="local_shipping" :show="!disabled.link" />
+            </template>
+            
+            <template v-if="auth.authent === 'tata-usaha'">
+                <v-btn-tips @click="openInvoice" label="INVOICE" icon="payment" :show="!disabled.link" />
+            </template>
         </template>
 
         <v-desktop-table v-if="desktop"
@@ -21,7 +29,7 @@
 
         <v-page-form small>
             <v-row>
-                <v-col cols="6">
+                <v-col md="10" sm="12">
                     <v-combobox
                         label="No. Polisi"
                         :items="polices"
@@ -30,16 +38,7 @@
                     ></v-combobox>
                 </v-col>
 
-                <v-col cols="4">
-                    <v-combobox
-                        label="Bengkel"
-                        :items="garages"
-                        :color="$root.theme"
-                        v-model="record.garage"
-                    ></v-combobox>
-                </v-col>
-
-                <v-col cols="2">
+                <v-col md="2" sm="12">
                     <v-date-menu
                         type="month"
                         label="Periode"
@@ -58,6 +57,100 @@
             </v-row>
         </v-page-form>
 
+        <!-- approval -->
+        <v-page-dialog
+            title="Persetujuan"
+            subtitle="form persetujuan pengajuan service"
+            submit-name="approve"
+            v-model="approval"
+            small
+            @approve="submitApprove"
+            @cancel="approval = false"
+        >
+            <v-row>
+                <v-col md="6" sm="12">
+                    <v-combobox
+                        label="No. Polisi"
+                        :items="polices"
+                        :color="$root.theme"
+                        v-model="record.vehicle"
+                        readonly
+                    ></v-combobox>
+                </v-col>
+
+                <v-col md="4" sm="12" v-if="auth.authent === 'pptk' || auth.authent === 'kpa'">
+                    <v-combobox
+                        label="Bengkel"
+                        :items="garages"
+                        :color="$root.theme"
+                        :readonly="auth.authent === 'kpa'"
+                        v-model="record.garage"
+                    ></v-combobox>
+                </v-col>
+
+                <v-col md="2" sm="12">
+                    <v-date-menu
+                        type="month"
+                        label="Periode"
+                        :color="$root.theme"
+                        v-model="record.periode"
+                        readonly
+                    ></v-date-menu>
+                </v-col>
+
+                <v-col cols="12">
+                    <v-textarea
+                        label="Catatan"
+                        :color="$root.theme"
+                        v-model="record.notes"
+                        readonly
+                    ></v-textarea>
+                </v-col>
+            </v-row>
+        </v-page-dialog>
+
+        <!-- spk -->
+        <v-page-dialog
+            title="Surat Perintah Kerja"
+            subtitle="preview surat perintah kerja"
+            submit-name="print"
+            v-model="preview"
+            @print="printDelivery"
+            @cancel="preview = false"
+        >
+            <v-row id="print-area">
+                <v-col cols="12" align="center">
+                    <div class="title text-uppercase font-weight-bold">surat perintah kerja</div>
+                    <div class="subtitle-2 text-uppercase">nomor: {{ record.id + '/' + record.periode + '/BIROUMUM' }}</div>
+                </v-col>
+
+                <v-col cols="12">
+                    <div class="body-1">Kepada Yth;</div>
+                    <div class="body-1"><span class="field d-inline-block" style="width: 100px;">Perusahaan</span><span class="value font-weight-bold">: {{ record.garage ? record.garage.text : '' }}</span></div>
+                    <div class="body-1"><span class="field d-inline-block" style="width: 100px;">Alamat</span><span class="value font-weight-bold">: {{ record.garage ? record.garage.address : '' }}</span></div>
+                    <div class="body-1"><span class="field d-inline-block" style="width: 100px;">Telepon</span><span class="value font-weight-bold">: {{ record.garage ? record.garage.phone : '' }}</span></div>
+                    <p>&nbsp;</p>
+                    <div class="body-1">Untuk melaksanakan service kendaraan roda 2 (dua) dan atau kendaraan roda 4 (empat) dan atau kendaraan roda 6 (enam) milik Pemerintah Provinsi Banten, sesuai data berikut ini:</div>
+                    <div class="body-1"><span class="field d-inline-block" style="width: 100px;">Merek</span><span class="value font-weight-bold">: {{ record.vehicle ? record.vehicle.brand : '' }}</span></div>
+                    <div class="body-1"><span class="field d-inline-block" style="width: 100px;">Type</span><span class="value font-weight-bold">: {{ record.vehicle ? record.vehicle.type : '' }}</span></div>
+                    <div class="body-1"><span class="field d-inline-block" style="width: 100px;">No. Polisi</span><span class="value font-weight-bold">: {{ record.police_id }}</span></div>
+                    <div class="body-1"><span class="field d-inline-block" style="width: 100px;">Pemegang</span><span class="value font-weight-bold">: {{ record.vehicle ? record.vehicle.name : '' }}</span></div>
+                    <p>&nbsp;</p>
+                </v-col>
+                <v-col cols="6"></v-col>
+                <v-col cols="6" align="center">
+                    <div class="body-1">Serang, 20-05-2019</div>
+                    <div class="body-1 text-uppercase font-weight-bold">kasubag pemeliharaan dan distribusi</div>
+                    <div class="body-1 text-uppercase font-weight-bold">biro umum setda provinsi banten</div>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <div class="body-1 text-uppercase font-weight-bold">sofan hero octora, s.sos, mm</div>
+                </v-col>
+            </v-row>
+        </v-page-dialog>
+
+        <!-- invoice -->
         <v-page-dialog
             title="Invoice"
             v-model="invoice"
@@ -202,6 +295,14 @@ export default {
     ],
 
     computed: {
+        enableDelete: function() {
+            return this.record.status === 'disposition';
+        },
+
+        enableEdit: function() {
+            return this.auth.authent === 'operator' && this.record.status === 'disposition';
+        },
+
         garages: function() {
             if (this.combos && this.combos.hasOwnProperty('garages')) {
                 return this.combos.garages;
@@ -258,7 +359,9 @@ export default {
     },
 
     data:() => ({
+        approval: false,
         invoice: false,
+        preview: false,
 
         detail: {
             item: null,
@@ -283,8 +386,8 @@ export default {
     created() {
         this.tableHeaders([
             { text: 'No.Pol', value: 'police_id' },
-            { text: 'Bengkel', value: 'garage.text' },
             { text: 'Periode', value: 'periode' },
+            { text: 'Status', value: 'status' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
         ]);
 
@@ -344,7 +447,8 @@ export default {
                 qty: 0,
                 price: 0,
                 amount: 0,
-                notes: null
+                notes: null,
+                status: null
             }
         },
 
@@ -359,12 +463,87 @@ export default {
         },
 
         openApproval: function() {
-            // 
+            this.approval = true;
         },
 
-        printDelivery: function() {
-            // 
+        openDelivery: function() {
+            this.preview = true;
         },
+
+        submitApprove: async function() {
+            try {
+                switch (this.auth.authent) {
+                    case 'kabiro':
+                        await this.http.post(`/api/service/${this.record.id}/submission`);        
+                        break;
+                    
+                    case 'pptk':
+                        await this.http.post(`/api/service/${this.record.id}/examine`, {
+                            garage: this.record.garage.value
+                        });
+                        break;
+                    
+                    case 'kpa':
+                        await this.http.post(`/api/service/${this.record.id}/approval`);
+                        break;
+                
+                    default:
+                        break;
+                }
+
+                this.approval = false;
+                this.recordReload();
+            } catch (error) {
+                this.$store.dispatch('errors', error);   
+            }
+        },
+
+        printDelivery: async function() {
+            try {
+                if (this.record.status === 'approval') {
+                    await this.http.post(`/api/service/${this.record.id}/workorder`);
+                }
+
+                let win = window.open('', 'PRINT', 'height=600,width=800');
+                    win.document.write('<html>');
+                    win.document.write('<head>');
+                    win.document.write('<title>Print Preview</title>');
+                    win.document.write('</head>');
+                    win.document.write('<body>');
+                    win.document.write('<div data-app="true" class="v-application v-application--is-ltr theme--light">');
+                    win.document.write('<div class="v-application--wrap">');
+                    win.document.write('<main class="v-content">');
+                    win.document.write('<div class="v-content__wrap">');
+                    win.document.write('<div class="row" style="padding-top: 160px; background-color: #ffffff;">');
+                    win.document.write(document.getElementById('print-area').innerHTML);
+                    win.document.write('</div>');
+                    win.document.write('</div>');
+                    win.document.write('</main>');
+                    win.document.write('</div>');
+                    win.document.write('</div>');
+                    win.document.write('</body>');
+                    win.document.write('</html>');
+
+                let css = win.document.createElement('link');
+                    css.type = 'text/css';
+                    css.rel = 'stylesheet';
+                    css.href = '/styles/monoland.css?version=1'; 
+                    css.media = 'all';
+                    win.document.getElementsByTagName("head")[0].appendChild(css);
+
+                setTimeout(() => {
+                    win.document.close();
+                    win.focus();
+                    win.print();
+                    win.close();
+                }, 500);
+
+                this.preview = false;
+                this.recordReload();
+            } catch (error) {
+                this.$store.dispatch('errors', error);   
+            }
+        }
     },
 
     watch: {

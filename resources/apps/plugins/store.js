@@ -382,11 +382,6 @@ export default new Vuex.Store({
             state.headers = payload;
         },
 
-        token: function(state, payload) {
-            state.auth.token = payload;
-            state.http.defaults.headers.common['Authorization'] = state.auth.token;
-        },
-
         upload: function(state, payload) {
             Object.keys(payload).forEach(key => {
                 state.upload[key] = payload[key];
@@ -842,7 +837,8 @@ export default new Vuex.Store({
                     scope: '*'
                 });
                 
-                commit('token', token.data);
+                state.auth.token = token.data;
+                state.http.defaults.headers.common['Authorization'] = token.data.token_type + ' ' + token.data.access_token;
 
                 let user = await state.http.get('/api/user');
                 commit('user', user.data );
@@ -885,6 +881,11 @@ export default new Vuex.Store({
 
                 if (status === 401) {
                     state.auth.signout();
+                    commit('snackbar', {
+                        color: 'error',
+                        text: 'The user credentials were incorrect.',
+                        state: true
+                    });
                 } else if (status === 403) {
                     commit('snackbar', {
                         color: 'error',

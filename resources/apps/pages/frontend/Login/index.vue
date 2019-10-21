@@ -147,7 +147,7 @@ export default {
     ],
 
     computed: {
-        ...mapState(['company', 'login', 'snackbar']),
+        ...mapState(['auth', 'company', 'login', 'snackbar']),
 
         backgroundStyle: function() {
             if (this.company && this.company.background && !this.$vuetify.breakpoint.xsOnly) {

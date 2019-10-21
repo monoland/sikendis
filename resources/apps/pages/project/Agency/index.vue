@@ -18,23 +18,25 @@
         </v-mobile-table>
 
         <v-page-form small>
-            <v-flex xs12>
-                <v-text-field
-                    label="Nama"
-                    :color="$root.theme"
-                    v-model="record.name"
-                    hide-details
-                ></v-text-field>
-            </v-flex>
+            <v-row>
+                <v-col cols="12">
+                    <v-text-field
+                        label="Nama"
+                        :color="$root.theme"
+                        v-model="record.name"
+                        hide-details
+                    ></v-text-field>
+                </v-col>
 
-            <v-flex xs12>
-                <v-switch 
-                    label="Tetapkan sebagai biro penanggung jawab."
-                    v-model="record.root" 
-                    hide-details
-                    inset 
-                ></v-switch>
-            </v-flex>
+                <v-col cols="12">
+                    <v-switch 
+                        label="Tetapkan sebagai biro penanggung jawab."
+                        v-model="record.root" 
+                        hide-details
+                        inset 
+                    ></v-switch>
+                </v-col>
+            </v-row>
         </v-page-form>
     </v-page-wrap>
 </template>
@@ -56,6 +58,8 @@ export default {
     }),
 
     created() {
+        this.auth.pageinfo = null;
+
         this.tableHeaders([
             { text: 'Name', value: 'name' },
             { text: 'Updated', value: 'updated_at', class: 'datetime-field' }
@@ -76,6 +80,7 @@ export default {
 
     methods: {
         openLink: function() {
+            this.auth.pageinfo = this.record.name;
             this.$router.push({ name: 'agency-user', params: { agency: this.record.id } });
         },
     }

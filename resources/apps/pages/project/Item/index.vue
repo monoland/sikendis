@@ -18,29 +18,31 @@
         </v-mobile-table>
 
         <v-page-form small>
-            <v-flex xs6>
-                <v-text-field
-                    label="Nama"
-                    :color="$root.theme"
-                    v-model="record.name"
-                ></v-text-field>
-            </v-flex>
+            <v-row>
+                <v-col cols="6">
+                    <v-text-field
+                        label="Nama"
+                        :color="$root.theme"
+                        v-model="record.name"
+                    ></v-text-field>
+                </v-col>
 
-            <v-flex xs3>
-                <v-text-field
-                    label="Unit"
-                    :color="$root.theme"
-                    v-model="record.unit"
-                ></v-text-field>
-            </v-flex>
+                <v-col cols="3">
+                    <v-text-field
+                        label="Unit"
+                        :color="$root.theme"
+                        v-model="record.unit"
+                    ></v-text-field>
+                </v-col>
 
-            <v-flex xs3>
-                <v-text-field
-                    label="Batas"
-                    :color="$root.theme"
-                    v-model="record.maxi"
-                ></v-text-field>
-            </v-flex>
+                <v-col cols="3">
+                    <v-text-field
+                        label="Batas"
+                        :color="$root.theme"
+                        v-model="record.maxi"
+                    ></v-text-field>
+                </v-col>
+            </v-row>
         </v-page-form>
     </v-page-wrap>
 </template>

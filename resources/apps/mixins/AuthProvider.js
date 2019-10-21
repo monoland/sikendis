@@ -49,6 +49,14 @@ class Authentication
         this.store.setItem('authent', response.authent_name);
     }
 
+    get pageinfo() {
+        return this.store.getItem('pageinfo');
+    }
+
+    set pageinfo(page) {
+        this.store.setItem('pageinfo', page);
+    }
+
     set update(user) {
         this.store.setItem('user', user);
     }
@@ -92,7 +100,7 @@ class Authentication
     }
 
     set menus(menus) {
-        if (!menus) return;
+        // if (!menus) return;
 
         this.store.setItem('menus', menus);
     }

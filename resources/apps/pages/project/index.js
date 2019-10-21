@@ -9,3 +9,4 @@ export { default as Brand } from './Brand';
 export { default as Type } from './Type';
 export { default as Vehicle } from './Vehicle';
 export { default as Service } from './Service';
+export { default as Notification } from './Notification';

@@ -9,7 +9,7 @@
     <meta http-equiv="Expires" content="0">
     <title>Sikendis</title>
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/styles/monoland.css">
+    <link rel="stylesheet" href="/styles/monoland.css?version=1">
 </head>
 
 <style>
@@ -44,8 +44,8 @@
         </div>
     </noscript>
 
-    <script src="/scripts/manifest.js"></script>
-    <script src="/scripts/vendor.js"></script>
-    <script src="/scripts/monoland.js"></script>
+    <script src="/scripts/manifest.js?version=1"></script>
+    <script src="/scripts/vendor.js?version=1"></script>
+    <script src="/scripts/monoland.js?version=1"></script>
 </body>
 </html>

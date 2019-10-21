@@ -72,6 +72,26 @@ class Vehicle extends Model
     }
 
     /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    /**
      * Scope for combo.
      */
     public function scopeFetchCombo($query)
@@ -131,7 +151,7 @@ class Vehicle extends Model
             $model->condition = $request->condition;
             $parent->vehicles()->save($model);
 
-            $police = new Police();
+            $police = Police::findOrNew($request->police_id);
             $police->id = $request->police_id;
             $police->name = $request->name;
             $police->color = $request->color;

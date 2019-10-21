@@ -35,6 +35,11 @@ Route::middleware(['api', 'auth:api'])->group(function () {
     Route::resource('garage', 'Apps\GarageController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('garage.user', 'Apps\GarageUserController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('vehicle', 'Apps\VehicleController')->only(['index', 'store', 'update', 'destroy']);
+    Route::post('service/{service}/submission', 'Apps\ServiceController@submission');
+    Route::post('service/{service}/examine', 'Apps\ServiceController@examine');
+    Route::post('service/{service}/approval', 'Apps\ServiceController@approval');
+    Route::post('service/{service}/workorder', 'Apps\ServiceController@workorder');
     Route::resource('service', 'Apps\ServiceController')->only(['index', 'store', 'update', 'destroy']);
     Route::resource('service.invoice', 'Apps\InvoiceController')->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('notification', 'Apps\NotificationController')->only(['index']);
 });

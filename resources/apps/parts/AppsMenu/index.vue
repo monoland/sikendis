@@ -140,11 +140,13 @@ export default {
     }),
 
     mounted() {
-        if (this.menus.constructor === Array && !this.menus.length && !this.auth.menus) { 
-            this.fetchAppMenus();
-        } else if (this.menus.constructor === Array && !this.menus.length && this.auth.menus) {
-            this.$store.commit('fetchAppMenus');
-        }
+        if (!this.auth.menus) this.fetchAppMenus();
+
+        // if (this.menus.constructor === Array && !this.menus.length && !this.auth.menus) { 
+        //     this.fetchAppMenus();
+        // } else if (this.menus.constructor === Array && !this.menus.length && this.auth.menus) {
+        //     this.$store.commit('fetchAppMenus');
+        // }
     },
 
     methods: {

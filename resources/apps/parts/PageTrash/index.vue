@@ -18,7 +18,7 @@
                 <span class="d-block f-nunito caption font-weight-regular text-uppercase white--text">konfirmasi penghapusan data.</span>
             </v-sheet>
 
-            <v-card-text class="px-4" style="text-align: justify;">
+            <v-card-text class="pt-3 px-4" style="text-align: justify;">
                 <span>
                     Menghapus data ini juga akan menghapus semua data yang terhubung dengan ini. Anda tidak dapat membatalkan ini.
                 </span>

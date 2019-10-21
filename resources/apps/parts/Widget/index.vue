@@ -12,8 +12,8 @@
             :class="dynClass"
         >
             <slot name="header">
-                <span class="d-block line-height1 title font-weight-regular mb-1 white--text">{{ title }}</span>
-                <span class="d-block f-nunito caption font-weight-regular text-uppercase white--text">{{ subtitle }}</span>
+                <span class="d-block line-height1 title font-weight-regular mb-1 white--text">{{ dynTitle }}</span>
+                <span class="d-block f-nunito caption font-weight-regular text-uppercase white--text">{{ dynSubtitle }}</span>
             </slot>
         </v-sheet>
 
@@ -32,7 +32,7 @@ export default {
     name: 'v-widget',
 
     computed: {
-        ...mapState(['page']),
+        ...mapState(['auth', 'page']),
 
         dynClass: function() {
             return 'px-4 pb-3';  //( this.table ? 'px-4 pb-3' : 'px-6');
@@ -46,7 +46,11 @@ export default {
             return 'calc(100% - 32px)';
         },
 
-        title: function() {
+        dynTitle: function() {
+            if (this.title) {
+                return this.title;
+            }
+
             if (this.table) {
                 return `Tabel ${this.page.title}`;
             }
@@ -54,9 +58,23 @@ export default {
             return this.page.title;
         },
 
-        subtitle: function() {
+        dynSubtitle: function() {
+            if (this.subtitle) {
+                return this.subtitle;
+            }
+
+            let describe = this.auth.pageinfo;
+
             if (this.table) {
+                if (describe) {
+                    return `daftar ${this.page.title} pada ${describe}`;
+                }
+
                 return `daftar seluruh ${this.page.title} yang tersedia`;
+            }
+
+            if (describe) {
+                return `tambah/ubah ${this.page.title} pada ${describe}`;    
             }
 
             return `form tambah/ubah ${this.page.title}`;
@@ -79,6 +97,16 @@ export default {
         form: {
             type: Boolean,
             default: false
+        },
+
+        title: {
+            type: String,
+            default: null
+        },
+
+        subtitle: {
+            type: String,
+            default: null
         },
 
         table: {

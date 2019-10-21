@@ -71,10 +71,7 @@
                 <div class="v-page__header--actions" :class="{ 'selected': selected }">
                     <v-scale-transition>
                         <slot name="add-button">
-                            <v-btn-tips @click="newFormOpen" label="ADDNEW" icon="add" :show="!disabled.add" />
-                            <!-- <v-btn class="static" icon key="newDesktop" :color="$root.theme" @click="newFormOpen" v-show="!disabled.add">
-                                <v-icon>add</v-icon>
-                            </v-btn> -->
+                            <v-btn-tips sticky @click="newFormOpen" label="ADDNEW" icon="add" :show="!disabled.add" />
                         </slot>
                     </v-scale-transition>
                     
@@ -82,23 +79,14 @@
 
                     <v-scale-transition>
                         <v-btn-tips @click="editFormOpen" label="EDIT" icon="edit" :show="!disabled.edit" />
-                        <!-- <v-btn icon key="edit" :color="$root.theme" @click="editFormOpen" v-show="!disabled.edit">
-                            <v-icon>edit</v-icon>
-                        </v-btn> -->
                     </v-scale-transition>
 
                     <v-scale-transition>
                         <v-btn-tips @click="trashFormOpen" label="DELETE" icon="delete" :show="!disabled.delete" />
-                        <!-- <v-btn icon key="trash" :color="$root.theme" @click="trashFormOpen" v-show="!disabled.delete">
-                            <v-icon>delete</v-icon>
-                        </v-btn> -->
                     </v-scale-transition>
 
                     <v-scale-transition>
                         <v-btn-tips @click="recordReload" label="REFRESH" icon="refresh" :show="!disabled.refresh" />
-                        <!-- <v-btn icon key="reload" :color="$root.theme" @click="recordReload" v-show="!disabled.refresh">
-                            <v-icon>refresh</v-icon>
-                        </v-btn> -->
                     </v-scale-transition>
                 </div>
             </template>
@@ -144,6 +132,16 @@ export default {
         crud: {
             type: Boolean,
             default: false
+        },
+
+        enableDelete: {
+            type: Boolean,
+            default: true
+        },
+
+        enableEdit: {
+            type: Boolean,
+            default: true
         },
 
         flat: {
@@ -194,6 +192,15 @@ export default {
     },
 
     watch: {
+        disabled: {
+            handler: function() {
+                if (!this.enableEdit) this.disabled.edit = true;
+                if (!this.enableDelete) this.disabled.delete = true;
+            },
+
+            deep: true
+        },
+
         searchText: function(newVal) {
             this.bouncing(newVal);
         },

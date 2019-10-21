@@ -125,6 +125,8 @@ export default {
 
     methods: {
         openLink: function() {
+            this.auth.pageinfo = this.auth.pageinfo + ' ' + this.record.name;
+            
             this.$router.push({ name: 'vehicle', query: { type: this.record.id } });
         },
     }
