@@ -33,7 +33,7 @@ class ServiceCollection extends ResourceCollection
         return [
             'additional' => [
                 'combos' => [
-                    'polices' => Vehicle::where('agency_id', $request->user()->userable->id)->fetchCombo(),
+                    'polices' => Vehicle::where('agency_id', optional($request->user()->userable)->id)->fetchCombo(),
                     'garages' => Garage::fetchCombo(),
                     'items' => Item::fetchCombo(),
                 ],
