@@ -129,7 +129,7 @@ class Service extends Model
             case 'operator':
                 $mixquery
                     ->where('agency_id', $request->user()->userable->id)
-                    ->whereIn('status', ['disposition', 'submission', 'examine', 'approval']);
+                    ->whereIn('status', ['disposition', 'submission', 'examine', 'approval', 'work-order']);
                 break;
 
             case 'kabiro':
