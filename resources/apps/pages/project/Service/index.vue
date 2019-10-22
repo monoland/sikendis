@@ -5,7 +5,7 @@
                 <v-btn-tips @click="openApproval" label="PERSETUJUAN" icon="verified_user" :show="!disabled.link" />
             </template>
             
-            <template v-if="auth.authent === 'operator' && record.status === 'approval'">
+            <template v-if="auth.authent === 'operator' && (record.status === 'approval' || record.status === 'work-order')">
                 <v-btn-tips @click="openDelivery" label="SURAT JALAN" icon="local_shipping" :show="!disabled.link" />
             </template>
             
