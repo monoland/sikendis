@@ -126,7 +126,7 @@
                         </div>
                         <div class="describe">
                             <div class="title text-uppercase font-weight-black">pemerintah provinsi banten</div>
-                            <div class="display-1 text-uppercase font-weight-black">sekretatiat daerah</div>
+                            <div class="display-1 text-uppercase font-weight-black">sekretariat daerah</div>
                             <div class="body-2">Kawasan Pusat Pemerintahan Provinsi Banten (KP3B)</div>
                             <div class="body-2">Jalan Syech Nawawi Al-Bantani, Palima Serang Banten Telp. (0254) 200123 Fax. 200520</div>
                         </div>
