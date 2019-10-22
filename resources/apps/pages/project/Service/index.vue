@@ -118,7 +118,21 @@
             @print="printDelivery"
             @cancel="preview = false"
         >
-            <v-row id="print-area">
+            <v-row id="print-area" class="print-area">
+                <v-col cols="12">
+                    <div class="d-flex kopsurat">
+                        <div class="logo">
+                            <img src="/images/logo-holder.png" alt="logo">
+                        </div>
+                        <div class="describe">
+                            <div class="title text-uppercase font-weight-black">pemerintah provinsi banten</div>
+                            <div class="display-1 text-uppercase font-weight-black">sekretatiat daerah</div>
+                            <div class="body-2">Kawasan Pusat Pemerintahan Provinsi Banten (KP3B)</div>
+                            <div class="body-2">Jalan Syech Nawawi Al-Bantani, Palima Serang Banten Telp. (0254) 200123 Fax. 200520</div>
+                        </div>
+                    </div>
+                </v-col>
+
                 <v-col cols="12" align="center">
                     <div class="title text-uppercase font-weight-bold">surat perintah kerja</div>
                     <div class="subtitle-2 text-uppercase">nomor: {{ record.id + '/' + record.periode + '/BIROUMUM' }}</div>
@@ -148,7 +162,9 @@
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <div class="body-1 font-weight-bold">Drs. H. AHMAD SYAUKANI, M.Si</div>
+                    <div class="body-1 font-weight-bold" style="text-decoration: underline;">Drs. H. AHMAD SYAUKANI, M.Si</div>
+                    <div class="body-1">Pembina Utama Muda</div>
+                    <div class="body-1">NIP. 19740422 199303 1 001</div>
                 </v-col>
             </v-row>
         </v-page-dialog>
@@ -517,7 +533,7 @@ export default {
                     win.document.write('<div class="v-application--wrap">');
                     win.document.write('<main class="v-content">');
                     win.document.write('<div class="v-content__wrap">');
-                    win.document.write('<div class="row" style="padding-top: 160px; background-color: #ffffff;">');
+                    win.document.write('<div class="row print-area" style="padding-top: 0px; background-color: #ffffff;">');
                     win.document.write(document.getElementById('print-area').innerHTML);
                     win.document.write('</div>');
                     win.document.write('</div>');
