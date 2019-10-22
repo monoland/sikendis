@@ -139,7 +139,7 @@
                 </v-col>
                 <v-col cols="6"></v-col>
                 <v-col cols="6" align="center">
-                    <div class="body-1">Serang, {{ Date.now() }}</div>
+                    <div class="body-1">Serang, {{ record.created_at }}</div>
                     <div class="body-1 text-uppercase font-weight-bold">kasubag pemeliharaan dan distribusi</div>
                     <div class="body-1 text-uppercase font-weight-bold">biro umum setda provinsi banten</div>
                     <p>&nbsp;</p>

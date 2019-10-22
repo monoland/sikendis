@@ -49,6 +49,7 @@ class ServiceResource extends JsonResource
             ]),
             'details' => optional($this->invoice)->items ? InvoiceDetail::collection($details) : [],
             'pinned' => false,
+            'created_at' => date('d-m-Y', strtotime($this->created_at)),
             'updated_at' => (string) $this->updated_at,
         ];
     }
