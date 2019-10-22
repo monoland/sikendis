@@ -26,8 +26,8 @@ class ServiceResource extends JsonResource
                 'agency_id' => $this->agency_id,
                 'value' => $this->vehicle_id,
                 'name' => optional($this->vehicle)->name,
-                'brand' => optional($this->vehicle)->brand->name,
-                'type' => optional($this->vehicle)->type->name,
+                'brand' => optional($this->vehicle->brand)->name,
+                'type' => optional($this->vehicle->type)->name,
                 'year' => optional($this->vehicle)->year
             ],
             'garage' => [
