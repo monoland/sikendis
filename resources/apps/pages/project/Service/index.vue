@@ -136,6 +136,9 @@
                     <div class="body-1"><span class="field d-inline-block" style="width: 100px;">No. Polisi</span><span class="value font-weight-bold">: {{ record.police_id }}</span></div>
                     <div class="body-1"><span class="field d-inline-block" style="width: 100px;">Pemegang</span><span class="value font-weight-bold">: {{ record.vehicle ? record.vehicle.name : '' }}</span></div>
                     <p>&nbsp;</p>
+                    <div class="body-1">dengan keterangan:</div>
+                    <div class="body-1">{{ record.notes }}</div>
+                    <p>&nbsp;</p>
                 </v-col>
                 <v-col cols="6"></v-col>
                 <v-col cols="6" align="center">
